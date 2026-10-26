@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosotros - Mundo del Terror</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+
+    <header>
+        <h1>Sobre Nosotros</h1>
+
+
+        <nav>
+            <a href="{{ url_for('inicio') }}">Inicio</a>
+            <a href="{{ url_for('peliculas') }}">Pel�culas</a>
+            <a href="{{ url_for('nosotros') }}">Nosotros</a>
+        </nav>
+
+
+        <form action="{{ url_for('peliculas') }}" method="get">
+            <input type="search" name="busqueda" placeholder="Buscar pel�culas de terror">
+            <button type="submit">Buscar</button>
+        </form>
+    </header>
+
+
+    <main class="nosotros-main">
+        <section class="nosotros-hero">
+            <p class="nosotros-etiqueta">Detr�s de cada historia</p>
+            <h2>Amamos el cine que te quita el sue�o</h2>
+            <p>Un espacio para quienes disfrutan del terror, el suspenso y los misterios que permanecen en la memoria.</p>
+        </section>
+
+        <section class="nosotros-intro">
+            <div class="nosotros-texto">
+                <span class="nosotros-numero">01 / QUI�NES SOMOS</span>
+                <h2>Historias que nos re�nen</h2>
+                <p>Somos un proyecto dedicado al cine de terror. Reunimos informaci�n sobre pel�culas, personajes y cl�sicos para que puedas explorar este g�nero y descubrir nuevas historias.</p>
+            </div>
+            <div class="nosotros-cita">
+                <span aria-hidden="true">�</span>
+                <p>La mejor historia de terror es la que sigue contigo cuando termina la pel�cula.</p>
+            </div>
+        </section>
+
+        <section class="nosotros-objetivo">
+            <span class="nosotros-numero">02 / NUESTRO OBJETIVO</span>
+            <h2>Tu pr�xima pel�cula empieza aqu�</h2>
+            <p>Queremos ofrecer un sitio sencillo y cercano donde encuentres pel�culas de terror y conozcas sus principales caracter�sticas.</p>
+            <a class="inicio-boton" href="{{ url_for('peliculas') }}">Explorar pel�culas <span aria-hidden="true">?</span></a>
+        </section>
+
+        <section class="nosotros-generos">
+            <div>
+                <span class="nosotros-numero">03 / NUESTROS FAVORITOS</span>
+                <h2>G�neros para explorar</h2>
+            </div>
+            <ul>
+                <li>Terror sobrenatural</li>
+                <li>Suspenso psicol�gico</li>
+                <li>Monstruos y criaturas</li>
+                <li>Zombis</li>
+                <li>Cl�sicos del cine de terror</li>
+            </ul>
+        </section>
+    </main>
+
+
+    <footer>
+        <p>Mundo del Terror - 2026</p>
+    </footer>
+
+
+</body>
+</html>

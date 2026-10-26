@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pel�culas - Mundo del Terror</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+
+<header>
+    <h1>Mundo del Terror</h1>
+
+
+    <nav>
+        <a href="{{ url_for('inicio') }}">Inicio</a>
+        <a href="{{ url_for('peliculas') }}">Películas</a>
+        <a href="{{ url_for('nosotros') }}">Nosotros</a>
+    </nav>
+
+
+    <form action="{{ url_for('peliculas') }}" method="get">
+        <input type="search" name="busqueda"
+               placeholder="Buscar pel�culas de terror..."
+               value="{{ busqueda }}">
+        <button type="submit">Buscar</button>
+    </form>
+</header>
+
+
+<main>
+    <section class="hero">
+        <h2>Películas de terror</h2>
+        <p>Bienvenido al lugar donde comienzan tus peores pesadillas.</p>
+    </section>
+
+
+    <h2>Catálogo de películas</h2>
+
+
+    <div class="peliculas-grid">
+
+
+        {% for pelicula in peliculas %}
+        <details class="pelicula">
+            <summary>
+                <img class="portada"
+                     src="{{ pelicula.portada }}"
+                     alt="Portada de {{ pelicula.nombre }}">
+
+
+                <div class="pelicula-info">
+                    <h3>{{ pelicula.nombre }}</h3>
+                    <p class="anio">({{ pelicula.anio }})</p>
+                    <span class="ver-detalles">Ver detalles</span>
+                </div>
+            </summary>
+
+
+            <div class="detalles">
+                <p><strong>Resumen:</strong> {{ pelicula.resumen }}</p>
+                <p><strong>Director:</strong> {{ pelicula.director }}</p>
+                <p><strong>Año:</strong> {{ pelicula.anio }}</p>
+            </div>
+        </details>
+        {% else %}
+        <p>No se encontraron películas para "{{ busqueda }}".</p>
+        {% endfor %}
+
+
+    </div>
+</main>
+
+
+<footer>
+    <p>Mundo del Terror - 2026</p>
+</footer>
+
+
+</body>
+</html>

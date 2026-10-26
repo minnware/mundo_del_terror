@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ titulo }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+
+    <header>
+        <h1>{{ titulo }}</h1>
+
+
+    <nav>
+        <a href="{{ url_for('inicio') }}">Inicio</a>
+        <a href="{{ url_for('peliculas') }}">Películas</a>
+        <a href="{{ url_for('nosotros') }}">Nosotros</a>
+    </nav>
+
+    </header>
+
+
+    <main class="inicio-main">
+        <section class="inicio-hero">
+            <div class="inicio-contenido">
+                <p class="inicio-etiqueta">Historias para no dormir</p>
+                <h2>Entra si te atreves</h2>
+                <p class="inicio-mensaje">{{ mensaje }}</p>
+                <p class="inicio-descripcion">Explora nuestro catálogo y descubre películas de terror, suspenso y misterio que se quedarán contigo mucho después de que aparezcan los créditos.</p>
+                <a class="inicio-boton" href="{{ url_for('peliculas') }}">Explorar películas <span aria-hidden="true">→</span></a>
+            </div>
+            <button class="inicio-sello" id="boton-screamer" type="button" aria-label="No apagues la luz: mostrar susto"><span>NO APAGUES</span><strong>LA LUZ</strong></button>
+        </section>
+        <section class="inicio-destacados" aria-label="Qué encontrarás">
+            <article><span class="destacado-numero">01</span><h3>Clásicos inolvidables</h3><p>Películas que marcaron la historia del terror.</p></article>
+            <article><span class="destacado-numero">02</span><h3>Suspenso y misterio</h3><p>Relatos para mantenerte al borde del asiento.</p></article>
+            <article><span class="destacado-numero">03</span><h3>Tu próxima película</h3><p>Encuentra una nueva historia para descubrir.</p></article>
+        </section>
+    </main>
+    <div class="screamer" id="screamer" role="dialog" aria-modal="true" aria-label="¡Sorpresa!" aria-hidden="true" hidden>
+        <div class="screamer-destello"></div>
+        <img class="screamer-rostro" src="{{ url_for('static', filename='images/exorcista.jfif') }}" alt="Rostro de El exorcista">
+        <p class="screamer-mensaje">¡TE LO ADVERTIMOS!</p>
+        <span class="screamer-ayuda">Pulsa Escape o haz clic para volver</span>
+    </div>
+    <footer><p>Mundo del Terror · Historias para no dormir</p></footer>
+
+
+    <script>
+        (() => {
+            const boton = document.getElementById('boton-screamer');
+            const screamer = document.getElementById('screamer');
+            let temporizador;
+
+            function cerrarScreamer() {
+                clearTimeout(temporizador);
+                screamer.hidden = true;
+                screamer.classList.remove('screamer-visible');
+                screamer.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('screamer-activo');
+                boton.focus();
+            }
+
+            function mostrarScreamer() {
+                screamer.hidden = false;
+                screamer.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('screamer-activo');
+                requestAnimationFrame(() => screamer.classList.add('screamer-visible'));
+                temporizador = setTimeout(cerrarScreamer, 1900);
+            }
+
+            boton.addEventListener('click', mostrarScreamer);
+            screamer.addEventListener('click', cerrarScreamer);
+            document.addEventListener('keydown', (evento) => {
+                if (evento.key === 'Escape' && !screamer.hidden) cerrarScreamer();
+            });
+        })();
+    </script>
+</body>
+</html>
